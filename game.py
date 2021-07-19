@@ -54,12 +54,11 @@ def display_sample_image():
 
 # reset everything after button click or new puzzle image is set
 def image_resetting(tk_photo_list, grid_button_list, split_img_list, shuffle_button):
-    global blank_tile_row, blank_tile_col,game_state
+    global blank_tile_row, blank_tile_col
     split_img_list.clear()
     tk_photo_list.clear()
     tk_photo_order.clear()
     blank_tile_row, blank_tile_col=2,2
-    game_state = 'ready'
     split_image(3)
 
     grid_count = 0
@@ -187,6 +186,12 @@ def slide_tile(row, column):
             grid_button_list[row * 3 + column].configure(image=tk_photo_list[-1])
             grid_button_list[blank_tile_row * 3 + blank_tile_col].configure(image=temp_grid_img)
             blank_tile_row, blank_tile_col = row, column
+        #update the grid number
+        if grid_button_list[0].cget('text') != '':
+            for item in grid_button_list:
+                val = (item.cget('image'))
+                val = tk_photo_order.index(val)
+                item.configure(text=val + 1)
         check_game_success(tk_photo_list, grid_button_list, game_state)
 
 
