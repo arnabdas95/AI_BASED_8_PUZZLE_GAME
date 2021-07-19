@@ -54,7 +54,7 @@ def display_sample_image():
 
 # reset everything after button click or new puzzle image is set
 def image_resetting(tk_photo_list, grid_button_list, split_img_list, shuffle_button):
-    global blank_tile_row, blank_tile_col
+    global blank_tile_row, blank_tile_col,game_state
     split_img_list.clear()
     tk_photo_list.clear()
     tk_photo_order.clear()
@@ -68,6 +68,7 @@ def image_resetting(tk_photo_list, grid_button_list, split_img_list, shuffle_but
 
     grid_button_list.clear()
     tk_display()
+    game_state='ready'
     shuffle_button.configure(state='active')
     check_game_success(tk_photo_list, grid_button_list, game_state)
 
