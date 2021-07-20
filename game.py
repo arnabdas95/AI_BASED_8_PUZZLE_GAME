@@ -39,10 +39,10 @@ def select_demo_img(*demo_number):
     else:
         im = Image.open(demo_image_list[0])
 
-
+#display sample demo image
 def display_sample_image():
     global sample_img_list, temp, demo_tk_image_list
-    # as local temp is not showing image as garbage collected by python
+    # as local variable is not showing image as garbage collected by python
     for item in range(3):
         sample_img_list.append(Button(root, height=150, width=150, state='active', relief='solid'))
         sample_img_list[item].configure(command=lambda demo_number=item: select_demo_img(demo_number))
@@ -70,7 +70,7 @@ def image_resetting(tk_photo_list, grid_button_list, split_img_list, shuffle_but
     tk_display()
     game_state='ready'
     shuffle_button.configure(state='active')
-    check_game_success(tk_photo_list, grid_button_list, game_state)
+
 
 
 # convert pillow image to tkinter image
@@ -146,7 +146,7 @@ def check_game_success(tk_photo_list, grid_button_list, game_state):
             print('false')
             return False
     game_state = 'win'
-    print('true')
+    print('Win')
     return True
 
 
@@ -160,7 +160,7 @@ def get_blank_tile_row_col(grid_button_list, tk_photo_list, grid_size):
                 blank_tile_row, blank_tile_col = i, j
             grid_count += 1
 
-
+#move the tile up down left right
 def slide_tile(row, column):
     global blank_tile_row, blank_tile_col, game_state
     if game_state == 'active':
@@ -187,6 +187,7 @@ def slide_tile(row, column):
             grid_button_list[row * 3 + column].configure(image=tk_photo_list[-1])
             grid_button_list[blank_tile_row * 3 + blank_tile_col].configure(image=temp_grid_img)
             blank_tile_row, blank_tile_col = row, column
+
         #update the grid number
         if grid_button_list[0].cget('text') != '':
             for item in grid_button_list:
@@ -203,7 +204,7 @@ restart_button = Button(root, height=2, width=25, bg=BUTTON_COLOR, text='Reset',
                         command=lambda tk_photo_list=tk_photo_list, grid_button_list=grid_button_list,
                                        split_img_list=split_img_list, shuffle_button=shuffle_button: image_resetting(
                             tk_photo_list, grid_button_list, split_img_list, shuffle_button))
-show_number_button = Button(root, height=2, width=18, bg=BUTTON_COLOR, text='Number', state='active', relief='solid',
+show_number_button = Button(root, height=2, width=18, bg=BUTTON_COLOR, text='Toggle Number', state='active', relief='solid',
                             command=show_number)
 shuffle_button.place(x=0, y=470)
 restart_button.place(x=285, y=470)
